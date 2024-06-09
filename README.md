@@ -1,4 +1,4 @@
-# Historical AI Image Generator
+# Accurate AI Image Generator
 This repository contains the Python code for an AI-driven application designed to generate historically accurate and culturally sensitive images using a LangChain-like framework. The application leverages a custom prompt template, data integration from historical sources, and feedback mechanisms to improve the accuracy and relevance of generated images.
 
 #Features
