@@ -12,17 +12,18 @@ llm = OpenAI(api_key=api_key)
 # Define the prompt template with enhanced details for historical accuracy
 class HistoricalImagePromptTemplate(PromptTemplate):
     def generate_prompt(self, input_data):
-        # Create a narrative context for the image generation
-        context = f"This image should reflect the historical context of {input_data['event_name']} " \
-                  f"which occurred in {input_data['event_location']} on {input_data['event_date']}. " \
-                  f"Consider cultural nuances such as {input_data['cultural_details']}. " \
-                  f"Details: {input_data['details']}"
+        # Constructing the narrative context for the image generation
+        context = (f"This image should reflect the historical context of {input_data['event_name']} "
+                   f"which occurred in {input_data['event_location']} on {input_data['event_date']}. "
+                   f"Consider cultural nuances such as {input_data['cultural_details']}. "
+                   f"Details: {input_data['details']}")
         return context
 
 # Define an external data integration for fetching historical data
 class HistoricalDataIntegration(ExternalData):
     def fetch_data(self, event_id):
-        # Simulate a database query
+        # Simulate fetching data from a database or API
+        # Example data for demonstration purposes
         return {
             "event_name": "The signing of the Declaration of Independence",
             "event_location": "Philadelphia, PA, USA",
@@ -53,13 +54,13 @@ class HistoricalImageContextChain(LLMChain):
 
     def update_prompt_template_based_on_feedback(self, event_id):
         if event_id in self.feedback_db:
-            feedback = self.feedback_upgrade_db[event_id]
-            # Update the prompt template based on the feedback
+            feedback = self.feedback_db[event_id]
+            # Log the feedback update process for clarity
             print(f"Updating prompt for {event_id} based on feedback: {feedback}")
 
 # Setup and example usage
 data_integration = HistoricalDataIntegration()
-prompt_template = HistoricalImagePromptTemplate()
+prompt_template = HistoricalImage PromptTemplate()
 chain = HistoricalImageContextChain(llm=llm, prompt_template=prompt_template, data_integration=data_integration)
 
 # Run the chain with an event ID
